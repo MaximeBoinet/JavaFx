@@ -7,8 +7,10 @@ import java.time.LocalDate;
  */
 public class Rank {
     private String _id;
-    private LocalDate created_at;
-    private LocalDate updated_at;
+    private String created_at;
+    private String updated_at;
+    private LocalDate builded_created_at;
+    private LocalDate buildec_updated_at;
     private int nb;
     private String title;
     private int scoreToAcces;
@@ -22,19 +24,19 @@ public class Rank {
     }
 
     public LocalDate getCreated_at() {
-        return created_at;
+        return builded_created_at;
     }
 
     public void setCreated_at(LocalDate created_at) {
-        this.created_at = created_at;
+        this.builded_created_at = created_at;
     }
 
     public LocalDate getUpdated_at() {
-        return updated_at;
+        return buildec_updated_at;
     }
 
     public void setUpdated_at(LocalDate updated_at) {
-        this.updated_at = updated_at;
+        this.buildec_updated_at = updated_at;
     }
 
     public int getNb() {

@@ -1,5 +1,7 @@
 package sample.model;
 
+import sample.Main;
+
 import java.time.LocalDate;
 
 /**
@@ -26,16 +28,8 @@ public class Score {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
-        this.created_at = created_at;
-    }
-
     public LocalDate getUpdated_at() {
         return updated_at;
-    }
-
-    public void setUpdated_at(LocalDate updated_at) {
-        this.updated_at = updated_at;
     }
 
     public int getScoreInGame() {
@@ -52,6 +46,14 @@ public class Score {
 
     public void setIsFinished(int isFinished) {
         this.isFinished = isFinished;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = Main.mongoDateToLocalDate(created_at);
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
     @Override

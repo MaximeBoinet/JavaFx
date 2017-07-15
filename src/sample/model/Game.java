@@ -1,5 +1,7 @@
 package sample.model;
 
+import sample.Main;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -8,12 +10,16 @@ import java.util.HashMap;
  */
 public class Game {
     private String _id;
-    private LocalDate created_at;
-    private LocalDate updated_at;
+    private String created_at;
+    private String updated_at;
+    private LocalDate builded_created_at;
+    private LocalDate buildec_updated_at;
     private int difficulty;
     private boolean isMultiplayer;
     private boolean isPublic;
     private boolean isFinished;
+    private String[] Songs;
+    private String[] Scores;
     private HashMap<String, Song> songs;
     private HashMap<String, Score> scores;
 
@@ -26,19 +32,11 @@ public class Game {
     }
 
     public LocalDate getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDate created_at) {
-        this.created_at = created_at;
+        return builded_created_at;
     }
 
     public LocalDate getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDate updated_at) {
-        this.updated_at = updated_at;
+        return buildec_updated_at;
     }
 
     public int getDifficulty() {
@@ -71,6 +69,14 @@ public class Game {
 
     public void setFinished(boolean finished) {
         isFinished = finished;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.builded_created_at = Main.mongoDateToLocalDate(created_at);
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.buildec_updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
     @Override
