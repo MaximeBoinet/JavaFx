@@ -25,6 +25,8 @@ public class LoaderController {
     @FXML
     private TextArea tarea;
 
+    private double d;
+
     @FXML
     private void initialize() {
         Main.mainApp.loadCont = this;

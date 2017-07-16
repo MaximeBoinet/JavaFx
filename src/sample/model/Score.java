@@ -9,10 +9,14 @@ import java.time.LocalDate;
  */
 public class Score {
     private String _id;
-    private LocalDate created_at;
-    private LocalDate updated_at;
+    private String created_at;
+    private String updated_at;
+    private LocalDate builded_created_at;
+    private LocalDate buildec_updated_at;
     private int scoreInGame;
-    private int isFinished;
+    private boolean isFinished;
+    private String User;
+    private String Game;
     private User user;
     private Game game;
 
@@ -25,11 +29,11 @@ public class Score {
     }
 
     public LocalDate getCreated_at() {
-        return created_at;
+        return builded_created_at;
     }
 
     public LocalDate getUpdated_at() {
-        return updated_at;
+        return buildec_updated_at;
     }
 
     public int getScoreInGame() {
@@ -40,20 +44,20 @@ public class Score {
         this.scoreInGame = scoreInGame;
     }
 
-    public int getIsFinished() {
+    public boolean getIsFinished() {
         return isFinished;
     }
 
-    public void setIsFinished(int isFinished) {
+    public void setIsFinished(boolean isFinished) {
         this.isFinished = isFinished;
     }
 
     public void setCreated_at(String created_at) {
-        this.created_at = Main.mongoDateToLocalDate(created_at);
+        this.builded_created_at = Main.mongoDateToLocalDate(created_at);
     }
 
     public void setUpdated_at(String updated_at) {
-        this.updated_at = Main.mongoDateToLocalDate(updated_at);
+        this.buildec_updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
     @Override

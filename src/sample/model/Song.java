@@ -13,7 +13,7 @@ public class Song {
     private String created_at;
     private String updated_at;
     private LocalDate builded_created_at;
-    private LocalDate buildec_updated_at;
+    private LocalDate builded_updated_at;
     private String title;
     private String url;
     private String uri;
@@ -22,10 +22,6 @@ public class Song {
 
     public String get_id() {
         return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
     }
 
     public LocalDate getCreated_at() {
@@ -40,40 +36,24 @@ public class Song {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getUrl() {
         return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getUri() {
         return uri;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
     public int getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setCreated_at() {
+        this.builded_created_at = Main.mongoDateToLocalDate(this.created_at);
     }
 
-    public void setCreated_at(String created_at) {
-        this.builded_created_at = Main.mongoDateToLocalDate(created_at);
-    }
-
-    public void setUpdated_at(String updated_at) {
-        this.buildec_updated_at = Main.mongoDateToLocalDate(updated_at);
+    public void setUpdated_at() {
+        this.builded_updated_at = Main.mongoDateToLocalDate(this.updated_at);
     }
 
     @Override

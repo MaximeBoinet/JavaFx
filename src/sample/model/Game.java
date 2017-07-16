@@ -19,7 +19,7 @@ public class Game {
     private boolean isPublic;
     private boolean isFinished;
     private String[] Songs;
-    private String[] Scores;
+    private Object[] Scores;
     private HashMap<String, Song> songs;
     private HashMap<String, Score> scores;
 
@@ -27,9 +27,6 @@ public class Game {
         return _id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
-    }
 
     public LocalDate getCreated_at() {
         return builded_created_at;
@@ -43,17 +40,11 @@ public class Game {
         return difficulty;
     }
 
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
 
     public boolean isMultiplayer() {
         return isMultiplayer;
     }
 
-    public void setMultiplayer(boolean multiplayer) {
-        isMultiplayer = multiplayer;
-    }
 
     public boolean isPublic() {
         return isPublic;
@@ -67,16 +58,13 @@ public class Game {
         return isFinished;
     }
 
-    public void setFinished(boolean finished) {
-        isFinished = finished;
+
+    public void setCreated_at() {
+        this.builded_created_at = Main.mongoDateToLocalDate(this.created_at);
     }
 
-    public void setCreated_at(String created_at) {
-        this.builded_created_at = Main.mongoDateToLocalDate(created_at);
-    }
-
-    public void setUpdated_at(String updated_at) {
-        this.buildec_updated_at = Main.mongoDateToLocalDate(updated_at);
+    public void setUpdated_at() {
+        this.buildec_updated_at = Main.mongoDateToLocalDate(this.updated_at);
     }
 
     @Override

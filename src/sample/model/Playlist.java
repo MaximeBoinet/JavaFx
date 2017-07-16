@@ -25,10 +25,6 @@ public class Playlist {
         return _id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
     public LocalDate getCreated_at() {
         return builded_created_at;
     }
@@ -39,10 +35,6 @@ public class Playlist {
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Boolean getPublic() {
@@ -57,16 +49,13 @@ public class Playlist {
         return creator;
     }
 
-    public void setCreator(User creator) {
-        creator = creator;
+
+    public void setCreated_at() {
+        this.builded_created_at = Main.mongoDateToLocalDate(this.created_at);
     }
 
-    public void setCreated_at(String created_at) {
-        this.builded_created_at = Main.mongoDateToLocalDate(created_at);
-    }
-
-    public void setUpdated_at(String updated_at) {
-        this.buildec_updated_at = Main.mongoDateToLocalDate(updated_at);
+    public void setUpdated_at() {
+        this.buildec_updated_at = Main.mongoDateToLocalDate(this.updated_at);
     }
 
     @Override
