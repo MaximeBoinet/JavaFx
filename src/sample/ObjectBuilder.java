@@ -49,10 +49,10 @@ public class ObjectBuilder implements Runnable {
     }
 
     public void sendGetScore() throws Exception {
-        this.scan = new Scanner(new URL(BASEURL +"score").openStream());
+        this.scan = new Scanner(new URL(BASEURL +"game/score").openStream());
         build(Main.Scores, Score.class);
-        Main.mainApp.loadCont.pushTea("Songs builded","Parsing date song");
-        parseDateSong();
+        Main.mainApp.loadCont.pushTea("Scores builded","Parsing date score");
+        parseDateScore();
     }
 
     public void sendGetGenre() throws Exception {
@@ -63,7 +63,7 @@ public class ObjectBuilder implements Runnable {
     }
 
     public void sendGetArtist() throws Exception {
-        this.scan = new Scanner(new URL(BASEURL +"artist").openStream());
+        this.scan = new Scanner(new URL(BASEURL + "artist").openStream());
         build(Main.Scores, Score.class);
         Main.mainApp.loadCont.pushTea("Artists builded","Parsing date kind");
         parseDateArtist();
@@ -87,6 +87,7 @@ public class ObjectBuilder implements Runnable {
             (mainHm).put(job.getString("_id"), gson.fromJson(job.toString(), T));
             Main.mainApp.loadCont.advProgIn(indicUnit);
         }
+        pause();
         Main.mainApp.loadCont.resetIn();
         pause();
         Main.mainApp.loadCont.advProgBar(0.125);
@@ -155,9 +156,18 @@ public class ObjectBuilder implements Runnable {
         }
     }
 
+    public void parseDateScore() {
+        Iterator it = Main.mainApp.Scores.keySet().iterator();
+        while (it.hasNext()) {
+            String key = it.next().toString();
+            Main.mainApp.Scores.get(key).setCreated_at();
+            Main.mainApp.Scores.get(key).setUpdated_at();
+        }
+    }
+
     public void pause(){
         try {
-            Thread.sleep(2);
+            Thread.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -192,6 +202,8 @@ public class ObjectBuilder implements Runnable {
             Main.mainApp.dowloaded = true;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            return;
         }
     }
 

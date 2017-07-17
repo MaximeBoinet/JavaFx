@@ -25,45 +25,43 @@ public class LoaderController {
     @FXML
     private TextArea tarea;
 
-    private double d;
-
     @FXML
     private void initialize() {
         Main.mainApp.loadCont = this;
-        tarea.setText("");
-        tarea.setEditable(false);
-        labprog.setText("");
-        labprog.setEditable(false);
-        labtot.setText("");
-        labtot.setEditable(false);
-        labtot.setFocusTraversable(false);
-        labprog.setFocusTraversable(false);
-        labtot.setBorder(Border.EMPTY);
-        labprog.setBorder(Border.EMPTY);
+        this.tarea.setText("");
+        this.tarea.setEditable(false);
+        this.labprog.setText("");
+        this.labprog.setEditable(false);
+        this.labtot.setText("");
+        this.labtot.setEditable(false);
+        this.labtot.setFocusTraversable(false);
+        this.labprog.setFocusTraversable(false);
+        this.labtot.setBorder(Border.EMPTY);
+        this.labprog.setBorder(Border.EMPTY);
     }
 
     public void advProgBar(double u) {
-        probar.setProgress(probar.getProgress()+u);
+        this.probar.setProgress(this.probar.getProgress()+u);
     }
 
     public void resetIn() {
-        proind.setProgress(0.00);
+        this.proind.setProgress(0.00);
     }
 
     public void advProgIn(double u) {
-        proind.setProgress(proind.getProgress()+u);
+        this.proind.setProgress(this.proind.getProgress()+u);
     }
 
     public void setGlob(String s) {
-        labtot.setText(s);
+        this.labtot.setText(s);
     }
 
     public void setCurrentLoading(String s) {
-        labprog.setText(s);
+        this.labprog.setText(s);
     }
 
     public void pushTea(String s, String s2) {
-        tarea.setText( s +"\n"+ tarea.getText() );
+        this.tarea.setText( s +"\n"+ this.tarea.getText() );
         setCurrentLoading(s2);
     }
 }

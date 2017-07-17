@@ -12,7 +12,7 @@ public class Score {
     private String created_at;
     private String updated_at;
     private LocalDate builded_created_at;
-    private LocalDate buildec_updated_at;
+    private LocalDate builded_updated_at;
     private int scoreInGame;
     private boolean isFinished;
     private String User;
@@ -33,7 +33,7 @@ public class Score {
     }
 
     public LocalDate getUpdated_at() {
-        return buildec_updated_at;
+        return builded_updated_at;
     }
 
     public int getScoreInGame() {
@@ -52,12 +52,12 @@ public class Score {
         this.isFinished = isFinished;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at() {
         this.builded_created_at = Main.mongoDateToLocalDate(created_at);
     }
 
-    public void setUpdated_at(String updated_at) {
-        this.buildec_updated_at = Main.mongoDateToLocalDate(updated_at);
+    public void setUpdated_at() {
+        this.builded_updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
     @Override

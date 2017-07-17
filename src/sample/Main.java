@@ -1,18 +1,14 @@
 package sample;
 
-import com.sun.javafx.tk.Toolkit;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import sample.model.*;
 import sample.view.LoaderController;
 
@@ -21,8 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Main extends Application {
     public Stage dialog;
@@ -46,6 +43,7 @@ public class Main extends Application {
         this.mainApp = this;
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("StatMaker");
+        this.primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/ico.ico")));
         this.dowloaded = false;
         Users = new HashMap<>();
         Songs = new HashMap<>();
@@ -67,6 +65,7 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
         showMainView();
     }
 
@@ -89,11 +88,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
         dialog.show();
-        try {
-            TimeUnit.MILLISECONDS.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         ob = new ObjectBuilder();
         Thread t = new Thread(ob);

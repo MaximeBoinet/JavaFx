@@ -26,12 +26,18 @@ public class User {
     private String lastName;
     private boolean isAdmin;
     private String mail;
+    private String Rank;
     private Rank rank;
     private Long globalScore;
-    private Long gold;
+    private Double gold;
     private String location;
     private LocalDate birthDay;
     private Rewards rewards;
+
+    public String[] getGames() {
+        return Games;
+    }
+
     private String[] Games;
     private String[] Friends;
     private String[] Playlists;
@@ -69,15 +75,15 @@ public class User {
         return mail;
     }
 
-    public Rank getRank() {
-        return rank;
+    public String getRank() {
+        return Rank;
     }
 
     public Long getGlobalScore() {
         return globalScore;
     }
 
-    public Long getGold() {
+    public Double getGold() {
         return gold;
     }
 
@@ -89,12 +95,12 @@ public class User {
         return birthDay;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public LocalDate getCreated_at() {
+        return builded_created_at;
     }
 
-    public String getUpdated_at() {
-        return updated_at;
+    public LocalDate getUpdated_at() {
+        return builded_updated_at;
     }
 
     public Rewards getRewards() {

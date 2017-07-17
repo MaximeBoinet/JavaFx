@@ -19,14 +19,21 @@ public class Game {
     private boolean isPublic;
     private boolean isFinished;
     private String[] Songs;
-    private Object[] Scores;
+    private AssossiativScorePlayer[] Scores;
     private HashMap<String, Song> songs;
     private HashMap<String, Score> scores;
+
+    public String[] getSongs() {
+        return Songs;
+    }
+
+    public AssossiativScorePlayer[] getScore() {
+        return this.Scores;
+    }
 
     public String get_id() {
         return _id;
     }
-
 
     public LocalDate getCreated_at() {
         return builded_created_at;
@@ -40,11 +47,9 @@ public class Game {
         return difficulty;
     }
 
-
     public boolean isMultiplayer() {
         return isMultiplayer;
     }
-
 
     public boolean isPublic() {
         return isPublic;
@@ -58,13 +63,21 @@ public class Game {
         return isFinished;
     }
 
-
     public void setCreated_at() {
         this.builded_created_at = Main.mongoDateToLocalDate(this.created_at);
     }
 
     public void setUpdated_at() {
         this.builded_updated_at = Main.mongoDateToLocalDate(this.updated_at);
+    }
+
+    public String getScoreUser(String key) {
+        for (AssossiativScorePlayer assoss : this.Scores) {
+            if (assoss.getPlayer().equals(key)) {
+                return assoss.getScore();
+            }
+        }
+        return null;
     }
 
     @Override
