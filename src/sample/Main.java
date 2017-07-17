@@ -2,6 +2,7 @@ package sample;
 
 import com.sun.javafx.tk.Toolkit;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     public Stage dialog;
@@ -36,15 +38,15 @@ public class Main extends Application {
     public static HashMap<String, Rank> Ranks;
     public static HashMap<String, Genre> Genres;
     public static HashMap<String, Score> Scores;
-
-
+    public static HashMap<String, Artist> Artist;
+    public boolean dowloaded;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.mainApp = this;
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("StatMaker");
-
+        this.dowloaded = false;
         Users = new HashMap<>();
         Songs = new HashMap<>();
         Games = new HashMap<>();
@@ -52,6 +54,7 @@ public class Main extends Application {
         Ranks = new HashMap<>();
         Genres = new HashMap<>();
         Scores = new HashMap<>();
+        Artist = new HashMap<>();
         showLoader();
     }
 
@@ -72,32 +75,37 @@ public class Main extends Application {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(primaryStage);
         dialog.initStyle(StageStyle.UNDECORATED);
-        dialog.setOnCloseRequest(we -> Main.mainApp.initRootLayout());
-        dialog.setOnHiding(we -> Main.mainApp.initRootLayout());
+        dialog.setOnHiding(we -> {
+            if(dowloaded)Main.mainApp.initRootLayout();
+            else try {
+                this.stop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         try {
             dialog.setScene(new Scene(new FXMLLoader(Main.class.getResource("view/loader.fxml")).load()));
         } catch (IOException e) {
             e.printStackTrace();
         }
         dialog.show();
+        try {
+            TimeUnit.MILLISECONDS.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ob = new ObjectBuilder();
         Thread t = new Thread(ob);
         t.start();
-
-
-
-
     }
 
     public void showMainView() {
         try {
-            // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MainView.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
-
-            // Set person overview into the center of root layout.
-            root.setCenter(personOverview);
+            AnchorPane mainView = (AnchorPane) loader.load();
+            root.setCenter(mainView);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -110,8 +118,6 @@ public class Main extends Application {
 
     public static LocalDate mongoDateToLocalDate(String mongodate) {
         SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
-        SimpleDateFormat output= new SimpleDateFormat("yyyy-MM-dd");
-        //String isoFormat = original.format(mongodate);
         Date d;
         LocalDate date;
         try {

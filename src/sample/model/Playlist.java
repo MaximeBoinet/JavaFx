@@ -13,7 +13,7 @@ public class Playlist {
     private String created_at;
     private String updated_at;
     private LocalDate builded_created_at;
-    private LocalDate buildec_updated_at;
+    private LocalDate builded_updated_at;
     private String title;
     private Boolean isPublic;
     private String Creator;
@@ -30,7 +30,7 @@ public class Playlist {
     }
 
     public LocalDate getUpdated_at() {
-        return buildec_updated_at;
+        return builded_updated_at;
     }
 
     public String getTitle() {
@@ -55,7 +55,7 @@ public class Playlist {
     }
 
     public void setUpdated_at() {
-        this.buildec_updated_at = Main.mongoDateToLocalDate(this.updated_at);
+        this.builded_updated_at = Main.mongoDateToLocalDate(this.updated_at);
     }
 
     @Override

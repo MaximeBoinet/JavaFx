@@ -62,6 +62,13 @@ public class ObjectBuilder implements Runnable {
         parseDateGenre();
     }
 
+    public void sendGetArtist() throws Exception {
+        this.scan = new Scanner(new URL(BASEURL +"artist").openStream());
+        build(Main.Scores, Score.class);
+        Main.mainApp.loadCont.pushTea("Artists builded","Parsing date kind");
+        parseDateArtist();
+    }
+
     public void build(HashMap mainHm, Class T) {
         this.res = new String();
         while (this.scan.hasNext())
@@ -81,7 +88,8 @@ public class ObjectBuilder implements Runnable {
             Main.mainApp.loadCont.advProgIn(indicUnit);
         }
         Main.mainApp.loadCont.resetIn();
-        Main.mainApp.loadCont.advProgBar(0.10);
+        pause();
+        Main.mainApp.loadCont.advProgBar(0.125);
     }
 
     public void parseDateUser() {
@@ -138,9 +146,18 @@ public class ObjectBuilder implements Runnable {
         }
     }
 
+    public void parseDateArtist() {
+        Iterator it = Main.mainApp.Artist.keySet().iterator();
+        while (it.hasNext()) {
+            String key = it.next().toString();
+            Main.mainApp.Artist.get(key).setCreated_at();
+            Main.mainApp.Artist.get(key).setUpdated_at();
+        }
+    }
+
     public void pause(){
         try {
-            Thread.sleep(5);
+            Thread.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -169,6 +186,10 @@ public class ObjectBuilder implements Runnable {
             pause();
             Main.mainApp.loadCont.pushTea("Kinds date parsed","Building scores");
             this.sendGetScore();
+            pause();
+            Main.mainApp.loadCont.pushTea("Scores date parsed","Building artists");
+            this.sendGetArtist();
+            Main.mainApp.dowloaded = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -177,6 +198,7 @@ public class ObjectBuilder implements Runnable {
     @Override
     public void run() {
         createObject();
-        Platform.runLater(() -> Main.mainApp.dialog.hide());
+        if (Main.mainApp.dowloaded)
+            Platform.runLater(() -> Main.mainApp.dialog.hide());
     }
 }
