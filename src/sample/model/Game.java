@@ -20,8 +20,6 @@ public class Game {
     private boolean isFinished;
     private String[] Songs;
     private AssossiativScorePlayer[] Scores;
-    private HashMap<String, Song> songs;
-    private HashMap<String, Score> scores;
 
     public String[] getSongs() {
         return Songs;
@@ -90,8 +88,8 @@ public class Game {
                 ", isMultiplayer=" + isMultiplayer +
                 ", isPublic=" + isPublic +
                 ", isFinished=" + isFinished +
-                ", songs=" + songs +
-                ", scores=" + scores +
+                ", songs=" + Songs +
+                ", scores=" + Scores +
                 '}';
     }
 }

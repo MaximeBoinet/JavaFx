@@ -28,23 +28,15 @@ public class User {
     private String mail;
     private String Rank;
     private Rank rank;
-    private Long globalScore;
+    private Integer globalScore;
     private Double gold;
     private String location;
     private LocalDate birthDay;
-    private Rewards rewards;
-
-    public String[] getGames() {
-        return Games;
-    }
-
+    private String[] Rewards;
     private String[] Games;
     private String[] Friends;
     private String[] Playlists;
     private String Preferences;
-    private HashMap<String, Game> games;
-    private HashMap<String, User> friends;
-    private HashMap<String, Playlist> playlist;
     private Preferences preferences;
 
     public void setCreated_at() {
@@ -79,7 +71,7 @@ public class User {
         return Rank;
     }
 
-    public Long getGlobalScore() {
+    public Integer getGlobalScore() {
         return globalScore;
     }
 
@@ -103,20 +95,20 @@ public class User {
         return builded_updated_at;
     }
 
-    public Rewards getRewards() {
-        return rewards;
-    }
-
-    public void setRewards(Rewards rewards) {
-        this.rewards = rewards;
+    public String[] getRewards() {
+        return Rewards;
     }
 
     public boolean isAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public String[] getGames() {
+        return Games;
+    }
+
+    public String[] getPlaylists() {
+        return Playlists;
     }
 
     @Override
@@ -136,7 +128,7 @@ public class User {
                 ", games=" + (Games != null ? Games.toString(): "Null") +
                 ", location='" + location + '\'' +
                 ", birthDay=" + birthDay +
-                ", rewards=" + rewards +
+                ", rewards=" + Rewards +
                 ", friends=" + (Friends != null ?  Friends.toString() : "Null") +
                 ", playlist=" + (Playlists != null ? Playlists.toString() : "Null") +
                 ", preferences=" + (Preferences != null ? Preferences.toString() : "Null") +

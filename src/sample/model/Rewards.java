@@ -12,7 +12,7 @@ public class Rewards {
     private String created_at;
     private String updated_at;
     private LocalDate builded_created_at;
-    private LocalDate buildec_updated_at;
+    private LocalDate builded_updated_at;
     private String title;
     private String description;
     private String type;
@@ -31,7 +31,7 @@ public class Rewards {
     }
 
     public LocalDate getUpdated_at() {
-        return buildec_updated_at;
+        return builded_updated_at;
     }
 
     public String getTitle() {
@@ -71,7 +71,7 @@ public class Rewards {
     }
 
     public void setUpdated_at(String updated_at) {
-        this.buildec_updated_at = Main.mongoDateToLocalDate(updated_at);
+        this.builded_updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
     @Override

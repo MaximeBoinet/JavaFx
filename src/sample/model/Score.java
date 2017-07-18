@@ -17,8 +17,6 @@ public class Score {
     private boolean isFinished;
     private String User;
     private String Game;
-    private User user;
-    private Game game;
 
     public String get_id() {
         return _id;
@@ -68,8 +66,8 @@ public class Score {
                 ", updated_at=" + updated_at +
                 ", scoreInGame=" + scoreInGame +
                 ", isFinished=" + isFinished +
-                ", user=" + user +
-                ", game=" + game +
+                ", user=" + User +
+                ", game=" + Game +
                 '}';
     }
 }

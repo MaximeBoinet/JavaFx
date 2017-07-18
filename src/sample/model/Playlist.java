@@ -17,9 +17,7 @@ public class Playlist {
     private String title;
     private Boolean isPublic;
     private String Creator;
-    private User creator;
     private String[] Songs;
-    private HashMap<String, Song> songs;
 
     public String get_id() {
         return _id;
@@ -37,6 +35,10 @@ public class Playlist {
         return title;
     }
 
+    public String[] getSongs() {
+        return Songs;
+    }
+
     public Boolean getPublic() {
         return isPublic;
     }
@@ -45,10 +47,9 @@ public class Playlist {
         isPublic = aPublic;
     }
 
-    public User getCreator() {
-        return creator;
+    public String getCreator() {
+        return Creator;
     }
-
 
     public void setCreated_at() {
         this.builded_created_at = Main.mongoDateToLocalDate(this.created_at);

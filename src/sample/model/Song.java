@@ -18,7 +18,7 @@ public class Song {
     private String url;
     private String uri;
     private int duration;
-    private HashMap<String, Artist> Artist;
+    private String[] Artist;
 
     public String get_id() {
         return _id;
