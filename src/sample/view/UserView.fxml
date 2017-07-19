@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -37,11 +38,12 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="31.0" layoutY="27.0" text="Nombre total:">
+                                    <Label layoutX="31.0" layoutY="27.0" text="Total users:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
-                                    <Label layoutX="123.0" layoutY="27.0" text="totaluser" />
+                                    <Label fx:id="totalUser" layoutX="106.0" layoutY="27.0" text="totaluser" />
+                                    <PieChart fx:id="pieCh" layoutX="14.0" layoutY="44.0" prefHeight="263.0" prefWidth="294.0" />
                                  </children></AnchorPane>
                         </content>
                       </TitledPane>
@@ -97,7 +99,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="userPlaylistTab" layoutX="40.0" layoutY="124.0" prefHeight="427.0" prefWidth="359.0">
+                                    <TableView fx:id="userPlaylistTab" layoutX="40.0" layoutY="108.0" prefHeight="420.0" prefWidth="359.0">
                                       <columns>
                                         <TableColumn fx:id="titlePlaylist" prefWidth="75.0" text="Title" />
                                           <TableColumn fx:id="createdThe" prefWidth="75.0" text="Created the" />
@@ -120,7 +122,7 @@
                                        </font>
                                     </Label>
                                     <Label fx:id="totalPlaylist" layoutX="457.0" layoutY="27.0" text="totalplaylist" />
-                                    <TableView fx:id="userPlaylistSongsTab" layoutX="447.0" layoutY="179.0" prefHeight="372.0" prefWidth="200.0">
+                                    <TableView fx:id="userPlaylistSongsTab" layoutX="447.0" layoutY="156.0" prefHeight="372.0" prefWidth="200.0" AnchorPane.rightAnchor="25.0">
                                       <columns>
                                         <TableColumn fx:id="songsPlayTitle" prefWidth="75.0" text="Title" />
                                       </columns>
@@ -128,15 +130,65 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <Label layoutX="443.0" layoutY="132.0" text="Songs of playlist:">
+                                    <Label layoutX="440.0" layoutY="108.0" text="Songs of playlist:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="nomPlay" layoutX="547.0" layoutY="132.0" text="nomplaylist" />
+                                    <Label fx:id="nomPlay" layoutX="547.0" layoutY="108.0" text="nomplaylist" />
                                  </children></AnchorPane>
                         </content>
                       </TitledPane>
+                        <TitledPane animated="false" text="Rewards">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="29.0" layoutY="25.0" text="Currently owned reward by this user:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalReward" layoutX="256.0" layoutY="25.0" text="total reward" />
+                                    <TableView fx:id="userTabReward" layoutX="42.0" layoutY="71.0" prefHeight="430.0" prefWidth="594.0">
+                                      <columns>
+                                        <TableColumn fx:id="tableTitleReward" prefWidth="241.0" text="Title" />
+                                        <TableColumn fx:id="tableTypeReward" prefWidth="232.0" text="Type" />
+                                          <TableColumn fx:id="tablePriceReward" prefWidth="163.0" text="Price" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Friends">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="35.0" layoutY="24.0" text="Total friends for this user:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalFriend" layoutX="196.0" layoutY="24.0" text="totalfriends" />
+                                    <TableView fx:id="userTabFriend" layoutX="35.0" layoutY="64.0" prefHeight="440.0" prefWidth="601.0">
+                                      <columns>
+                                        <TableColumn fx:id="tablenameFriend" prefWidth="75.0" text="UserName" />
+                                        <TableColumn fx:id="tableGoldFriend" prefWidth="75.0" text="Gold" />
+                                          <TableColumn fx:id="tableSinceFriend" prefWidth="75.0" text="PlaySince" />
+                                          <TableColumn fx:id="tableRankFriend" prefWidth="75.0" text="Rank" />
+                                          <TableColumn fx:id="tableglobScoreFriend" prefWidth="75.0" text="Score" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
                     </panes>
                   </Accordion>
                </children>

@@ -111,6 +111,10 @@ public class User {
         return Playlists;
     }
 
+    public String[] getFriends() {
+        return Friends;
+    }
+
     @Override
     public String toString() {
         return "User{" +

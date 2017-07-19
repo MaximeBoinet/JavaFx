@@ -16,7 +16,7 @@ public class Rewards {
     private String title;
     private String description;
     private String type;
-    private int goldToAcces;
+    private int goldToAccess;
 
     public String get_id() {
         return _id;
@@ -59,18 +59,18 @@ public class Rewards {
     }
 
     public int getGoldToAcces() {
-        return goldToAcces;
+        return goldToAccess;
     }
 
     public void setGoldToAcces(int goldToAcces) {
-        this.goldToAcces = goldToAcces;
+        this.goldToAccess = goldToAcces;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at() {
         this.builded_created_at = Main.mongoDateToLocalDate(created_at);
     }
 
-    public void setUpdated_at(String updated_at) {
+    public void setUpdated_at() {
         this.builded_updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
@@ -83,7 +83,7 @@ public class Rewards {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", type='" + type + '\'' +
-                ", goldToAcces=" + goldToAcces +
+                ", goldToAcces=" + goldToAccess +
                 '}';
     }
 }

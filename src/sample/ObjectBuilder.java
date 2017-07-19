@@ -17,6 +17,7 @@ public class ObjectBuilder implements Runnable {
     public void sendGetUsers() throws Exception {
         this.scan = new Scanner(new URL(BASEURL +"users").openStream());
         build(Main.Users, User.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Users builded","Parsing date user");
         parseDateUser();
     }
@@ -24,12 +25,14 @@ public class ObjectBuilder implements Runnable {
     public void sendGetSongs() throws Exception {
         this.scan = new Scanner(new URL(BASEURL +"song").openStream());
         build(Main.Songs, Song.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Songs builded","Parsing date songs");
     }
 
     public void sendGetPlaylists() throws Exception {
         this.scan = new Scanner(new URL(BASEURL +"playlist").openStream());
         build(Main.Playlists, Playlist.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Playlists builded","Parsing date playlist");
         parseDatePlaylist();
     }
@@ -37,6 +40,7 @@ public class ObjectBuilder implements Runnable {
     public void sendGetGames() throws Exception {
         this.scan = new Scanner(new URL(BASEURL +"game").openStream());
         build(Main.Games, Game.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Games builded","Parsing date game");
         parseDateGame();
     }
@@ -44,6 +48,7 @@ public class ObjectBuilder implements Runnable {
     public void sendGetRank() throws Exception {
         this.scan = new Scanner(new URL(BASEURL +"rank").openStream());
         build(Main.Ranks, Rank.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Ranks builded","Parsing date rank");
         parseDateRank();
     }
@@ -51,22 +56,33 @@ public class ObjectBuilder implements Runnable {
     public void sendGetScore() throws Exception {
         this.scan = new Scanner(new URL(BASEURL +"game/score").openStream());
         build(Main.Scores, Score.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Scores builded","Parsing date score");
         parseDateScore();
     }
 
     public void sendGetGenre() throws Exception {
         this.scan = new Scanner(new URL(BASEURL +"kind").openStream());
-        build(Main.Scores, Score.class);
+        build(Main.Genres, Genre.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Kinds builded","Parsing date kind");
         parseDateGenre();
     }
 
     public void sendGetArtist() throws Exception {
         this.scan = new Scanner(new URL(BASEURL + "artist").openStream());
-        build(Main.Scores, Score.class);
+        build(Main.Artist, Artist.class);
+        pause();
         Main.mainApp.loadCont.pushTea("Artists builded","Parsing date kind");
         parseDateArtist();
+    }
+
+    public void sendGetRewards() throws Exception {
+        this.scan = new Scanner(new URL(BASEURL + "reward").openStream());
+        build(Main.Rewards, Rewards.class);
+        pause();
+        Main.mainApp.loadCont.pushTea("Rewards builded","Parsing date reward");
+        parseDateReward();
     }
 
     public void build(HashMap mainHm, Class T) {
@@ -90,15 +106,15 @@ public class ObjectBuilder implements Runnable {
         pause();
         Main.mainApp.loadCont.resetIn();
         pause();
-        Main.mainApp.loadCont.advProgBar(0.125);
+        Main.mainApp.loadCont.advProgBar(1/9);
     }
 
     public void parseDateUser() {
         Iterator it = Main.mainApp.Users.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Users.get(key).setCreated_at();
-            Main.mainApp.Users.get(key).setUpdated_at();
+            Main.Users.get(key).setCreated_at();
+            Main.Users.get(key).setUpdated_at();
         }
     }
 
@@ -106,8 +122,8 @@ public class ObjectBuilder implements Runnable {
         Iterator it = Main.mainApp.Games.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Games.get(key).setCreated_at();
-            Main.mainApp.Games.get(key).setUpdated_at();
+            Main.Games.get(key).setCreated_at();
+            Main.Games.get(key).setUpdated_at();
         }
     }
 
@@ -115,8 +131,8 @@ public class ObjectBuilder implements Runnable {
         Iterator it = Main.mainApp.Playlists.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Playlists.get(key).setCreated_at();
-            Main.mainApp.Playlists.get(key).setUpdated_at();
+            Main.Playlists.get(key).setCreated_at();
+            Main.Playlists.get(key).setUpdated_at();
         }
     }
 
@@ -124,8 +140,8 @@ public class ObjectBuilder implements Runnable {
         Iterator it = Main.mainApp.Ranks.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Ranks.get(key).setCreated_at();
-            Main.mainApp.Ranks.get(key).setUpdated_at();
+            Main.Ranks.get(key).setCreated_at();
+            Main.Ranks.get(key).setUpdated_at();
         }
     }
 
@@ -133,8 +149,8 @@ public class ObjectBuilder implements Runnable {
         Iterator it = Main.mainApp.Songs.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Songs.get(key).setCreated_at();
-            Main.mainApp.Songs.get(key).setUpdated_at();
+            Main.Songs.get(key).setCreated_at();
+            Main.Songs.get(key).setUpdated_at();
         }
     }
 
@@ -142,8 +158,8 @@ public class ObjectBuilder implements Runnable {
         Iterator it = Main.mainApp.Genres.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Genres.get(key).setCreated_at();
-            Main.mainApp.Genres.get(key).setUpdated_at();
+            Main.Genres.get(key).setCreated_at();
+            Main.Genres.get(key).setUpdated_at();
         }
     }
 
@@ -151,8 +167,8 @@ public class ObjectBuilder implements Runnable {
         Iterator it = Main.mainApp.Artist.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Artist.get(key).setCreated_at();
-            Main.mainApp.Artist.get(key).setUpdated_at();
+            Main.Artist.get(key).setCreated_at();
+            Main.Artist.get(key).setUpdated_at();
         }
     }
 
@@ -160,8 +176,17 @@ public class ObjectBuilder implements Runnable {
         Iterator it = Main.mainApp.Scores.keySet().iterator();
         while (it.hasNext()) {
             String key = it.next().toString();
-            Main.mainApp.Scores.get(key).setCreated_at();
-            Main.mainApp.Scores.get(key).setUpdated_at();
+            Main.Scores.get(key).setCreated_at();
+            Main.Scores.get(key).setUpdated_at();
+        }
+    }
+
+    public void parseDateReward() {
+        Iterator it = Main.mainApp.Rewards.keySet().iterator();
+        while (it.hasNext()) {
+            String key = it.next().toString();
+            Main.Rewards.get(key).setCreated_at();
+            Main.Rewards.get(key).setUpdated_at();
         }
     }
 
@@ -199,6 +224,9 @@ public class ObjectBuilder implements Runnable {
             pause();
             Main.mainApp.loadCont.pushTea("Scores date parsed","Building artists");
             this.sendGetArtist();
+            pause();
+            Main.mainApp.loadCont.pushTea("Artist date parsed","Building rewards");
+            this.sendGetRewards();
             Main.mainApp.dowloaded = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,7 +238,6 @@ public class ObjectBuilder implements Runnable {
     @Override
     public void run() {
         createObject();
-        if (Main.mainApp.dowloaded)
-            Platform.runLater(() -> Main.mainApp.dialog.hide());
+        Platform.runLater(() -> Main.mainApp.dialog.hide());
     }
 }

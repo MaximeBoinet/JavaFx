@@ -1,9 +1,9 @@
 package sample.view;
 
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -11,17 +11,23 @@ import sample.Main;
 import sample.model.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Iterator;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 /**
  * Created by MADMAX on 15/07/2017.
  */
 public class UserController {
     private ObservableList<User> usersobs;
+    private ObservableList<Rewards> userRewardsobs;
+    private ObservableList<User> userfriendsobs;
     private ObservableList<Game> gamesobs;
     private ObservableList<Song> songobs;
     private ObservableList<Playlist> playobs;
     private ObservableList<Song> playsongsobs;
+    private ObservableList<PieChart.Data> chartobs;
 
     private String currentUserId;
     private String currentUserGameId;
@@ -71,6 +77,29 @@ public class UserController {
     private TableColumn<Song, String> songsPlayTitle;
 
     @FXML
+    private TableView<User> userTabFriend;
+    @FXML
+    private TableColumn<User, String> tablenameFriend;
+    @FXML
+    private TableColumn<User, Double> tableGoldFriend;
+    @FXML
+    private TableColumn<User, LocalDate> tableSinceFriend;
+    @FXML
+    private TableColumn<User, String> tableRankFriend;
+    @FXML
+    private TableColumn<User, Integer> tableglobScoreFriend;
+
+    @FXML
+    private TableView<Rewards> userTabReward;
+    @FXML
+    private TableColumn<Rewards, String> tableTitleReward;
+    @FXML
+    private TableColumn<Rewards, String> tableTypeReward;
+    @FXML
+    private TableColumn<Rewards, Integer> tablePriceReward;
+
+
+    @FXML
     private Label userName;
     @FXML
     private Label userNamePLay;
@@ -82,7 +111,15 @@ public class UserController {
     private Label scoretot;
     @FXML
     private Label nomPlay;
+    @FXML
+    private Label totalUser;
+    @FXML
+    private Label totalReward;
+    @FXML
+    private Label totalFriend;
 
+    @FXML
+    public PieChart pieCh;
 
 
     @FXML
@@ -93,12 +130,15 @@ public class UserController {
     }
 
     private void initLabel() {
+        this.totalUser.setText(String.valueOf(Main.Users.keySet().size()));
         this.userName.setText("");
         this.totalGame.setText("");
         this.scoretot.setText("");
         this.userNamePLay.setText("");
         this.totalPlaylist.setText("");
         this.nomPlay.setText("");
+        this.totalFriend.setText("");
+        this.totalReward.setText("");
     }
 
     private void initTable() {
@@ -107,6 +147,8 @@ public class UserController {
         initTableSong();
         initTablePlaylist();
         initTablePlaylistSong();
+        initTableUserFriends();
+        initTabmeUserRewards();
     }
 
     private void initTableUser() {
@@ -146,28 +188,73 @@ public class UserController {
 
     private void initTablePlaylistSong() {
         this.userPlaylistSongsTab.setItems(playsongsobs);
+        this.songsPlayTitle.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue().getTitle())));
+    }
+
+    private void initTableUserFriends() {
+        this.userTabFriend.setItems(userfriendsobs);
+        this.tablenameFriend.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUserName()));
+        this.tableGoldFriend.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getGold().doubleValue()));
+        this.tableSinceFriend.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getCreated_at()));
+        this.tableRankFriend.setCellValueFactory(cellData -> new SimpleStringProperty(Main.Ranks.get(cellData.getValue().getRank()).getTitle()));
+        this.tableglobScoreFriend.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getGlobalScore()));
+    }
+
+    private void initTabmeUserRewards() {
+        this.userTabReward.setItems(userRewardsobs);
+        this.tableTitleReward.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        this.tableTypeReward.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue().getType())));
+        this.tablePriceReward.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getGoldToAcces()));
     }
 
     private void initMap() {
-        this.usersobs = FXCollections.observableArrayList();
-        this.gamesobs = FXCollections.observableArrayList();
-        this.songobs = FXCollections.observableArrayList();
-        this.playsongsobs = FXCollections.observableArrayList();
-        this.playobs = FXCollections.observableArrayList();
+        this.usersobs = observableArrayList();
+        this.gamesobs = observableArrayList();
+        this.songobs = observableArrayList();
+        this.playsongsobs = observableArrayList();
+        this.playobs = observableArrayList();
+        this.chartobs = observableArrayList();
+        this.userfriendsobs = observableArrayList();
+        this.userRewardsobs = observableArrayList();
         Iterator it = Main.mainApp.Users.keySet().iterator();
-        while (it.hasNext()) {
-            usersobs.add(Main.mainApp.Users.get(it.next()));
+        HashMap<String, Integer> ranks = new HashMap<>();
+        for (Object key: Main.Ranks.keySet()){
+            ranks.put(Main.Ranks.get(key).getTitle(),0);
         }
+        while (it.hasNext()) {
+            String key = it.next().toString();
+            String title = Main.Ranks.get(Main.Users.get(key).getRank()).getTitle();
+            ranks.put(title, ranks.get(title) + 1);
+            usersobs.add(Main.Users.get(key));
+        }
+        it = ranks.keySet().iterator();
+        while (it.hasNext()) {
+            String key = it.next().toString();
+            chartobs.add(new PieChart.Data(key, ranks.get(key)));
+        }
+        pieCh.setData(chartobs);
+        pieCh.setLabelsVisible(true);
+        pieCh.setLabelLineLength(10);
+        pieCh.setTitle("Users ranks");
     }
 
     public void setUserDetail(User userDetail) {
         this.currentUserId = userDetail.get_id();
         this.scoretot.setText("");
-        userName.setText(userDetail.getUserName());
-        totalGame.setText(String.valueOf(userDetail.getGames().length));
-        songobs.clear();
+        this.nomPlay.setText("");
+        this.userNamePLay.setText("");
+        this.totalPlaylist.setText("");
+        this.totalFriend.setText("");
+        this.totalReward.setText("");
+        this.userName.setText(userDetail.getUserName());
+        this.totalGame.setText(String.valueOf(userDetail.getGames().length));
+        this.songobs.clear();
+        this.playsongsobs.clear();
+        this.userfriendsobs.clear();
         setGameUser();
         setPlayListUser();
+        setFriendUser();
+        setRewardUser();
     }
 
     public void setGameUser() {
@@ -190,6 +277,8 @@ public class UserController {
         playobs.clear();
         for (String id: Main.Users.get(this.currentUserId).getPlaylists())
             playobs.add(Main.Playlists.get(id));
+        totalPlaylist.setText(String.valueOf(playobs.size()));
+        userNamePLay.setText(Main.Users.get(this.currentUserId).getUserName());
     }
 
     public void setPlayListUserSongs(Playlist play) {
@@ -201,4 +290,19 @@ public class UserController {
                 playsongsobs.add(Main.Songs.get(id));
         }
     }
+
+    private void setRewardUser() {
+        userRewardsobs.clear();
+        for (String id: Main.Users.get(this.currentUserId).getRewards())
+            userRewardsobs.add(Main.Rewards.get(id));
+        totalReward.setText(String.valueOf(userRewardsobs.size()));
+    }
+
+    private void setFriendUser() {
+        userfriendsobs.clear();
+        for (String id: Main.Users.get(this.currentUserId).getFriends())
+            userfriendsobs.add(Main.Users.get(id));
+        totalFriend.setText(String.valueOf(userfriendsobs.size()));
+    }
+
 }

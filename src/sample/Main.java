@@ -22,6 +22,7 @@ import java.util.HashMap;
 
 public class Main extends Application {
     public Stage dialog;
+    public Stage dialogerror;
     public Stage primaryStage;
     private BorderPane root;
     public static Runnable ob;
@@ -35,6 +36,7 @@ public class Main extends Application {
     public static HashMap<String, Genre> Genres;
     public static HashMap<String, Score> Scores;
     public static HashMap<String, Artist> Artist;
+    public static HashMap<String, Rewards> Rewards;
     public boolean dowloaded;
 
     @Override
@@ -52,6 +54,7 @@ public class Main extends Application {
         Genres = new HashMap<>();
         Scores = new HashMap<>();
         Artist = new HashMap<>();
+        Rewards = new HashMap<>();
         showLoader();
     }
 
@@ -61,10 +64,8 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
         showMainView();
     }
 
@@ -76,7 +77,7 @@ public class Main extends Application {
         dialog.setOnHiding(we -> {
             if(dowloaded)Main.mainApp.initRootLayout();
             else try {
-                this.stop();
+                showErrorDialog();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -97,11 +98,24 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MainView.fxml"));
-            AnchorPane mainView = (AnchorPane) loader.load();
+            AnchorPane mainView = loader.load();
             root.setCenter(mainView);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showErrorDialog() {
+        dialogerror = new Stage();
+        dialogerror.initModality(Modality.APPLICATION_MODAL);
+        dialogerror.initOwner(primaryStage);
+        dialogerror.initStyle(StageStyle.UNDECORATED);
+        try {
+            dialogerror.setScene(new Scene(new FXMLLoader(Main.class.getResource("view/Error.fxml")).load()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dialogerror.showAndWait();
     }
 
 
