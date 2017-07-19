@@ -74,6 +74,14 @@ public class Rewards {
         this.builded_updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
+    public static boolean postNewReward() {
+        return true;
+    }
+
+    public static boolean updateReward() {
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Rewards{" +

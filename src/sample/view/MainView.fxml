@@ -18,10 +18,25 @@
                 <fx:include fx:id="gameview" source="GameView.fxml" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
             </content>
           </Tab>
+            <Tab text="Playlists">
+               <content>
+                   <fx:include fx:id="playview" source="PlayView.fxml" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+               </content>
+            </Tab>
             <Tab text="Songs">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                   <fx:include fx:id="songview" source="SongsView.fxml" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
                </content>
+            </Tab>
+            <Tab text="Rewards">
+               <content>
+                   <fx:include fx:id="rewardview" source="RewardView.fxml" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+               </content>
+            </Tab>
+            <Tab text="Ranks">
+                <content>
+                    <fx:include fx:id="rankview" source="RankView.fxml" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+                </content>
             </Tab>
         </tabs>
       </TabPane>
