@@ -1,8 +1,10 @@
 package sample.model;
 
 import com.google.gson.Gson;
+import javafx.scene.control.Button;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
@@ -135,12 +137,25 @@ public class Rewards {
         HttpResponse response;
         try {
             response = httpClient.execute(put);
-            String res = EntityUtils.toString(response.getEntity());
             return response.getStatusLine().getStatusCode() == 200;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
+    }
+
+    public static boolean deleteReward(String id) {
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpDelete del = new HttpDelete(BASEURL+"/reward/"+id);
+        del.setHeader("Content-type", "application/json");
+        HttpResponse response;
+        try {
+            response = httpClient.execute(del);
+            return response.getStatusLine().getStatusCode() == 200;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

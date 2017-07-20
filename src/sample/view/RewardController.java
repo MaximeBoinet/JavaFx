@@ -53,10 +53,13 @@ public class RewardController {
     private Button create;
     @FXML
     private Button update;
+    @FXML
+    private Button delete;
 
     @FXML
     private void initialize() {
         update.setDisable(true);
+        delete.setDisable(true);
         initLabel();
         initMap();
         initTable();
@@ -86,12 +89,23 @@ public class RewardController {
     }
 
     private void setRewardDetail(Rewards reward) {
-        this.update.setDisable(false);
-        this.currentRewardId = reward.get_id();
-        this.descup.setText(reward.getDescription() != null ? reward.getDescription() : "");
-        this.titleup.setText(reward.getTitle());
-        this.goldup.setText(String.valueOf(reward.getGoldToAcces()));
-        this.typeup.setText(reward.getType());
+        if (reward != null) {
+            this.update.setDisable(false);
+            this.delete.setDisable(false);
+            this.currentRewardId = reward.get_id();
+            this.descup.setText(reward.getDescription() != null ? reward.getDescription() : "");
+            this.titleup.setText(reward.getTitle());
+            this.goldup.setText(String.valueOf(reward.getGoldToAcces()));
+            this.typeup.setText(reward.getType());
+        } else {
+            this.currentRewardId = null;
+            this.delete.setDisable(true);
+            this.update.setDisable(true);
+            this.descup.setText("");
+            this.titleup.setText("");
+            this.goldup.setText("");
+            this.typeup.setText("");
+        }
     }
 
     @FXML
@@ -131,6 +145,16 @@ public class RewardController {
             if (Rewards.updateReward(Main.Rewards.get(currentRewardId), titleup.getText(), typeup.getText(), goldup.getText(), descup.getText())) {
                 this.rewardTab.refresh();
             }
+        }
+    }
+
+    @FXML
+    private void handleDeleteClicked() {
+        if (currentRewardId != null) {
+            if (Rewards.deleteReward(currentRewardId)) {
+                this.rewardsobs.remove(Main.Rewards.remove(currentRewardId));
+            }
+
         }
     }
 }
