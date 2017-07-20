@@ -1,13 +1,25 @@
 package sample.model;
 
+import com.google.gson.Gson;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import sample.Main;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 
 /**
  * Created by MADMAX on 21/06/2017.
  */
 public class Rewards {
+    private static final String BASEURL = "http://mocnodeserv.hopto.org:3000/";
     private String _id;
     private String created_at;
     private String updated_at;
@@ -74,11 +86,60 @@ public class Rewards {
         this.builded_updated_at = Main.mongoDateToLocalDate(updated_at);
     }
 
-    public static boolean postNewReward() {
-        return true;
+    public static Rewards postNewReward(String ptitle, String ptype, String pgold, String pdesc) {
+        Rewards re = new Rewards();
+        re.setTitle(ptitle);
+        re.setType(ptype);
+        re.setGoldToAcces(Integer.parseInt(pgold));
+        re.setDescription(pdesc);
+        Gson gson = new Gson();
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost post = new HttpPost(BASEURL+"/reward/");
+        StringEntity postingString = null;
+        try {
+            postingString = new StringEntity(gson.toJson(re));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        post.setEntity(postingString);
+        post.setHeader("Content-type", "application/json");
+        HttpResponse response;
+        try {
+            response = httpClient.execute(post);
+            String res = EntityUtils.toString(response.getEntity());
+            JSONObject js = new JSONObject(res);
+            re = gson.fromJson(js.toString(), Rewards.class);
+            return re;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public static boolean updateReward() {
+    public static boolean updateReward(Rewards re, String ptitle, String ptype, String pgold, String pdesc) {
+        re.setTitle(ptitle);
+        re.setType(ptype);
+        re.setGoldToAcces(Integer.parseInt(pgold));
+        re.setDescription(pdesc);
+        Gson gson = new Gson();
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPut put = new HttpPut(BASEURL+"/reward/"+re.get_id());
+        StringEntity puttingString = null;
+        try {
+            puttingString = new StringEntity(gson.toJson(re));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        put.setEntity(puttingString);
+        put.setHeader("Content-type", "application/json");
+        HttpResponse response;
+        try {
+            response = httpClient.execute(put);
+            String res = EntityUtils.toString(response.getEntity());
+            return response.getStatusLine().getStatusCode() == 200;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 

@@ -106,7 +106,7 @@ public class ObjectBuilder implements Runnable {
         pause();
         Main.mainApp.loadCont.resetIn();
         pause();
-        Main.mainApp.loadCont.advProgBar(1/9);
+        Main.mainApp.loadCont.advProgBar((1.00/9.00));
     }
 
     public void parseDateUser() {

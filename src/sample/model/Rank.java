@@ -49,6 +49,16 @@ public class Rank {
         return scoreToAcces;
     }
 
+    public static boolean postNewRank() {
+        //TODO
+        return true;
+    }
+
+    public static boolean updateRank() {
+        //TODO
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Rank{" +
