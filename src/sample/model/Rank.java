@@ -66,7 +66,7 @@ public class Rank {
         return title;
     }
 
-    public int getScoreToAcces() {
+    public int getScoreToAccess() {
         return scoreToAccess;
     }
 
@@ -144,7 +144,7 @@ public class Rank {
                 ", updated_at=" + updated_at +
                 ", nb=" + nb +
                 ", title='" + title + '\'' +
-                ", scoreToAcces=" + scoreToAccess +
+                ", scoreToAccess=" + scoreToAccess +
                 '}';
     }
 }

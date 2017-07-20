@@ -30,7 +30,6 @@ public class RankController {
     @FXML
     private TableColumn<Rank, Integer> tableScoreToAccesRank;
 
-
     @FXML
     private Button deleter;
     @FXML
@@ -60,7 +59,7 @@ public class RankController {
         this.tableTitleRank.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         this.tableCreatedRank.setCellValueFactory(cellDate -> new SimpleObjectProperty<>(cellDate.getValue().getCreated_at()));
         this.tableRankRank.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNb()));
-        this.tableScoreToAccesRank.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getScoreToAcces()));
+        this.tableScoreToAccesRank.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getScoreToAccess()));
         this.tabRank.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> setRanksDetail(newValue));
     }
@@ -75,7 +74,15 @@ public class RankController {
     }
 
     public void setRanksDetail(Rank ranksDetail) {
-        this.currentRanksId = ranksDetail.get_id();
+        if (ranksDetail != null) {
+            this.titlerup.setText(ranksDetail.getTitle());
+            this.scorerup.setText(String.valueOf(ranksDetail.getScoreToAccess()));
+            this.currentRanksId = ranksDetail.get_id();
+        } else {
+            this.titlerup.setText("");
+            this.scorerup.setText("");
+            this.currentRanksId = null;
+        }
     }
 
     @FXML
