@@ -2,13 +2,13 @@ package sample.model;
 
 import com.google.gson.Gson;
 import javafx.scene.control.Button;
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
+import org.apache.http.*;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.*;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
