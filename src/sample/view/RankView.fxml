@@ -43,20 +43,14 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="62.0" layoutY="85.0" text="Title:">
+                                    <Label layoutX="65.0" layoutY="185.0" text="Title:">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="titlerup" layoutX="187.0" layoutY="82.0" prefHeight="25.0" prefWidth="318.0" />
-                                    <Label layoutX="60.0" layoutY="303.0" text="ScoreToAcces:">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="scorerup" layoutX="187.0" layoutY="300.0" prefHeight="25.0" prefWidth="318.0" />
-                                    <Button fx:id="updater" layoutX="319.0" layoutY="606.0" mnemonicParsing="false" onAction="#handleUpdateClicked" text="Update" />
-                                    <Button fx:id="deleter" layoutX="562.0" layoutY="606.0" mnemonicParsing="false" onAction="#handleDeleteClicked" style="-fx-border-color: red;" text="Delete" textFill="RED" />
+                                    <TextField fx:id="titlerup" layoutX="188.0" layoutY="182.0" prefHeight="25.0" prefWidth="318.0" />
+                                    <Button fx:id="updater" layoutX="320.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleUpdateClicked" text="Update" />
+                                    <Button fx:id="deleter" layoutX="536.0" layoutY="471.0" mnemonicParsing="false" onAction="#handleDeleteClicked" style="-fx-border-color: red;" text="Delete" textFill="RED" />
                                  </children>
                               </AnchorPane>
                            </content>

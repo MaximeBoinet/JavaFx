@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,8 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import sample.model.*;
 import sample.view.LoaderController;
 
@@ -21,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Main extends Application {
+    public static String token;
     public Stage dialog;
     public Stage dialogerror;
     public Stage primaryStage;
@@ -41,6 +45,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        token = null;
         this.mainApp = this;
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("StatMaker");
@@ -65,7 +70,12 @@ public class Main extends Application {
             e.printStackTrace();
         }
         primaryStage.setScene(new Scene(root));
+        Logger log = new Logger();
+
         primaryStage.show();
+        log.initDialog();
+        if (token == null || token == "")
+            primaryStage.close();
         showMainView();
     }
 
@@ -109,18 +119,38 @@ public class Main extends Application {
         dialogerror = new Stage();
         dialogerror.initModality(Modality.APPLICATION_MODAL);
         dialogerror.initOwner(primaryStage);
-        dialogerror.initStyle(StageStyle.UNDECORATED);
+        dialogerror.initStyle(StageStyle.UTILITY);
         try {
             dialogerror.setScene(new Scene(new FXMLLoader(Main.class.getResource("view/Error.fxml")).load()));
         } catch (IOException e) {
             e.printStackTrace();
         }
         dialogerror.showAndWait();
+        this.primaryStage.close();
     }
 
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void spawnPopup() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("view/popup.fxml"));
+        AnchorPane page = null;
+        try {
+            page = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        FadeTransition ft = new FadeTransition(Duration.millis(900), page);
+        ft.setFromValue(0.0);
+        ft.setToValue(0.97);
+        ft.play();
+        Popup popup = new Popup();
+        popup.setAutoHide(true);
+        popup.getContent().add(page);
+        popup.show(new Stage());
     }
 
     public static LocalDate mongoDateToLocalDate(String mongodate) {

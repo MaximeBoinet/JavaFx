@@ -98,8 +98,7 @@ public class Rank {
         return null;
     }
 
-    public static boolean updateRank(Rank ra, String ptitle, int pscoreToAcces) {
-        ra.setScoreToAcces(pscoreToAcces);
+    public static boolean updateRank(Rank ra, String ptitle) {
         ra.setTitle(ptitle);
         Gson gson = new Gson();
         HttpClient httpClient = HttpClientBuilder.create().build();

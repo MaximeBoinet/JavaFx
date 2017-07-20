@@ -44,8 +44,6 @@ public class RankController {
 
     @FXML
     private TextField titlerup;
-    @FXML
-    private TextField scorerup;
 
     @FXML
     private void initialize() {
@@ -76,11 +74,9 @@ public class RankController {
     public void setRanksDetail(Rank ranksDetail) {
         if (ranksDetail != null) {
             this.titlerup.setText(ranksDetail.getTitle());
-            this.scorerup.setText(String.valueOf(ranksDetail.getScoreToAccess()));
             this.currentRanksId = ranksDetail.get_id();
         } else {
             this.titlerup.setText("");
-            this.scorerup.setText("");
             this.currentRanksId = null;
         }
     }
@@ -108,12 +104,9 @@ public class RankController {
     private void handleUpdateClicked() {
         if (titlerup.getText().isEmpty())
             titlerup.setStyle("-fx-border-color: red;");
-        else if (scorerup.getText().isEmpty())
-            scorerup.setStyle("-fx-border-color: red;");
         else {
             titlerup.setStyle("");
-            scorerup.setStyle("");
-            if (Rank.updateRank(Main.Ranks.get(currentRanksId), titlerup.getText(), Integer.parseInt(scorerup.getText()))) {
+            if (Rank.updateRank(Main.Ranks.get(currentRanksId), titlerup.getText())) {
                 this.tabRank.refresh();
             }
         }

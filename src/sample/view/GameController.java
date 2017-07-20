@@ -17,18 +17,20 @@ import java.util.Iterator;
  */
 public class GameController {
     private ObservableList<Game> gameobs;
+    private String currentGameId;
 
     @FXML
     private TableView<Game> gameTab;
-
     @FXML
     private TableColumn<Game, LocalDate> created;
-
+    @FXML
+    private TableColumn<Game, Integer> played;
+    @FXML
+    private TableColumn<Game, Integer> songs;
 
 
     @FXML
     private void initialize() {
-        gameobs = FXCollections.observableArrayList();
         initMap();
         initTable();
     }
@@ -36,13 +38,14 @@ public class GameController {
     private void initTable() {
         gameTab.setItems(gameobs);
         created.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreated_at()));
+        played.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getScore().length));
+        songs.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSongs().length));
+
     }
 
     private void initMap() {
-        Iterator it = Main.mainApp.Games.keySet().iterator();
-        while (it.hasNext()) {
-            gameobs.add(Main.mainApp.Games.get(it.next()));
-        }
+        gameobs = FXCollections.observableArrayList();
+        gameobs.addAll(Main.Games.values());
     }
 
 
