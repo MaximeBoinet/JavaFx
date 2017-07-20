@@ -85,6 +85,7 @@ public class Rank {
         }
         post.setEntity(postingString);
         post.setHeader("Content-type", "application/json");
+        post.setHeader("authorization", Main.token);
         HttpResponse response;
         try {
             response = httpClient.execute(post);
@@ -111,6 +112,7 @@ public class Rank {
         }
         put.setEntity(puttingString);
         put.setHeader("Content-type", "application/json");
+        put.setHeader("authorization", Main.token);
         HttpResponse response;
         try {
             response = httpClient.execute(put);
@@ -125,6 +127,7 @@ public class Rank {
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpDelete del = new HttpDelete(BASEURL+"/rank/"+id);
         del.setHeader("Content-type", "application/json");
+        del.setHeader("authorization", Main.token);
         HttpResponse response;
         try {
             response = httpClient.execute(del);

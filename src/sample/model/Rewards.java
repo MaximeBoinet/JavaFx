@@ -2,6 +2,7 @@ package sample.model;
 
 import com.google.gson.Gson;
 import javafx.scene.control.Button;
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -105,6 +106,7 @@ public class Rewards {
         }
         post.setEntity(postingString);
         post.setHeader("Content-type", "application/json");
+        post.setHeader("authorization", Main.token);
         HttpResponse response;
         try {
             response = httpClient.execute(post);
@@ -134,6 +136,7 @@ public class Rewards {
         }
         put.setEntity(puttingString);
         put.setHeader("Content-type", "application/json");
+        put.setHeader("authorization", Main.token);
         HttpResponse response;
         try {
             response = httpClient.execute(put);
@@ -148,6 +151,7 @@ public class Rewards {
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpDelete del = new HttpDelete(BASEURL+"/reward/"+id);
         del.setHeader("Content-type", "application/json");
+        del.setHeader("authorization", Main.token);
         HttpResponse response;
         try {
             response = httpClient.execute(del);
