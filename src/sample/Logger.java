@@ -73,7 +73,6 @@ public class Logger {
         HttpResponse response;
         try {
             response = httpClient.execute(post);
-            System.out.print(response.getStatusLine());
             if (response.getStatusLine().getStatusCode() == 200)
                 Main.token = EntityUtils.toString(response.getEntity());
         } catch (IOException e) {

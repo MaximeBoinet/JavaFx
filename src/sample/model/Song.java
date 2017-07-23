@@ -18,7 +18,7 @@ public class Song {
     private String url;
     private String uri;
     private int duration;
-    private String[] Artist;
+    private String[] Artists;
 
     public String get_id() {
         return _id;
@@ -48,6 +48,10 @@ public class Song {
         return duration;
     }
 
+    public String[] getArtist() {
+        return Artists;
+    }
+
     public void setCreated_at() {
         this.builded_created_at = Main.mongoDateToLocalDate(this.created_at);
     }
@@ -66,7 +70,7 @@ public class Song {
                 ", url='" + url + '\'' +
                 ", uri='" + uri + '\'' +
                 ", duration=" + duration +
-                ", Artist=" + Artist +
+                ", Artist=" + Artists +
                 '}';
     }
 }

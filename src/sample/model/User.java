@@ -27,7 +27,6 @@ public class User {
     private boolean isAdmin;
     private String mail;
     private String Rank;
-    private Rank rank;
     private Integer globalScore;
     private Double gold;
     private String location;
@@ -37,7 +36,6 @@ public class User {
     private String[] Friends;
     private String[] Playlists;
     private String Preferences;
-    private Preferences preferences;
 
     public void setCreated_at() {
         this.builded_created_at = Main.mongoDateToLocalDate(this.created_at);
@@ -126,7 +124,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", isAdmin=" + isAdmin +
                 ", mail='" + mail + '\'' +
-                ", rank=" + rank +
+                ", rank=" + Rank +
                 ", globalScore=" + globalScore +
                 ", gold=" + gold +
                 ", games=" + (Games != null ? Games.toString(): "Null") +

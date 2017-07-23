@@ -27,6 +27,7 @@ public class ObjectBuilder implements Runnable {
         build(Main.Songs, Song.class);
         pause();
         Main.mainApp.loadCont.pushTea("Songs builded","Parsing date songs");
+        parseDateSong();
     }
 
     public void sendGetPlaylists() throws Exception {

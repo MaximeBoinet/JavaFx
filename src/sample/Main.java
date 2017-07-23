@@ -23,6 +23,8 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 
+import static java.lang.System.in;
+
 public class Main extends Application {
     public static String token;
     public Stage dialog;
@@ -69,9 +71,20 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        for (User id: Main.Users.values()) {
+            System.out.println("User: " + id.getUserName());
+            for (String id2: id.getPlaylists()) {
+                if (Main.Playlists.get(id2) == null) {
+                    System.out.println("Pobleme playlist");
+                } else {
+                    System.out.println(Main.Playlists.get(id2).getTitle());
+                }
+            }
+            System.out.println("\n\n");
+        }
         primaryStage.setScene(new Scene(root));
         Logger log = new Logger();
-
         primaryStage.show();
         log.initDialog();
         if (token == null || token == "")
@@ -134,7 +147,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static void spawnPopup() {
+    /*public static void spawnPopup() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("view/popup.fxml"));
         AnchorPane page = null;
@@ -151,7 +164,7 @@ public class Main extends Application {
         popup.setAutoHide(true);
         popup.getContent().add(page);
         popup.show(new Stage());
-    }
+    }*/
 
     public static LocalDate mongoDateToLocalDate(String mongodate) {
         SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");

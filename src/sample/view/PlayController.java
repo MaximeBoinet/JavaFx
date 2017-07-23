@@ -10,6 +10,7 @@ import sample.Main;
 import sample.model.Playlist;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -18,17 +19,18 @@ import static javafx.collections.FXCollections.observableArrayList;
  */
 public class PlayController {
     private ObservableList<Playlist> playlistsobs;
+    private String currentIdPlaylist;
 
     @FXML
-    private TableView<Playlist> playlistTab;
+    private TableView<Playlist> playlistTabp;
     @FXML
-    private TableColumn<Playlist, LocalDate> createdThe;
+    private TableColumn<Playlist, LocalDate> createdThep;
     @FXML
-    private TableColumn<Playlist, String> numberSongs;
+    private TableColumn<Playlist, String> numberSongsp;
     @FXML
-    private TableColumn<Playlist, String> titlePlaylist;
+    private TableColumn<Playlist, String> titlePlaylistp;
     @FXML
-    private TableColumn<Playlist, String> creator;
+    private TableColumn<Playlist, String> creatorp;
 
     @FXML
     public void initialize() {
@@ -51,16 +53,17 @@ public class PlayController {
     }
 
     private void initTablePlaylist() {
-        this.playlistTab.setItems(playlistsobs);
-        this.createdThe.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreated_at()));
-        this.numberSongs.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getSongs().length)));
-        this.titlePlaylist.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
-        this.creator.setCellValueFactory(cellData -> new SimpleStringProperty((Main.Users.get(cellData.getValue().getCreator()).getUserName())));
-        this.playlistTab.getSelectionModel().selectedItemProperty().addListener(
+        this.playlistTabp.setItems(playlistsobs);
+        this.createdThep.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreated_at()));
+        this.numberSongsp.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getSongs().length)));
+        this.titlePlaylistp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        this.creatorp.setCellValueFactory(cellData -> new SimpleStringProperty((Main.Users.get(cellData.getValue().getCreator()).getUserName())));
+        this.playlistTabp.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> setPlayListDetail(newValue));
     }
 
     private void setPlayListDetail(Playlist newValue) {
-
+        this.currentIdPlaylist = newValue.get_id();
+        Iterator i = Main.Songs.keySet().iterator();
     }
 }
