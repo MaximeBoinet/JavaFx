@@ -20,7 +20,7 @@ import java.time.LocalDate;
  * Created by MADMAX on 20/06/2017.
  */
 public class Rank {
-    private static final String BASEURL = "http://mocnodeserv.hopto.org:3000/";
+    private static final String BASEURL = "http://mocnodeserv.hopto.org:80/";
     private String _id;
     private String created_at;
     private String updated_at;

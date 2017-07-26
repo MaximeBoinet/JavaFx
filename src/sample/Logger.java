@@ -22,7 +22,7 @@ import java.util.Optional;
  * Created by MADMAX on 20/07/2017.
  */
 public class Logger {
-    private static final String BASEURL = "http://mocnodeserv.hopto.org:3000/";
+    private static final String BASEURL = "http://mocnodeserv.hopto.org:80/";
 
     public void initDialog() {
         Dialog<Pair<String, String>> dialog = new Dialog<>();

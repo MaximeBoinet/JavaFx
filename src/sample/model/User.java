@@ -28,7 +28,7 @@ public class User {
     private String mail;
     private String Rank;
     private Integer globalScore;
-    private Double gold;
+    private Float gold;
     private String location;
     private LocalDate birthDay;
     private String[] Rewards;
@@ -73,7 +73,7 @@ public class User {
         return globalScore;
     }
 
-    public Double getGold() {
+    public Float getGold() {
         return gold;
     }
 

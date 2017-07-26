@@ -71,18 +71,6 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (User id: Main.Users.values()) {
-            System.out.println("User: " + id.getUserName());
-            for (String id2: id.getPlaylists()) {
-                if (Main.Playlists.get(id2) == null) {
-                    System.out.println("Pobleme playlist");
-                } else {
-                    System.out.println(Main.Playlists.get(id2).getTitle());
-                }
-            }
-            System.out.println("\n\n");
-        }
         primaryStage.setScene(new Scene(root));
         Logger log = new Logger();
         primaryStage.show();
@@ -142,29 +130,9 @@ public class Main extends Application {
         this.primaryStage.close();
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
-
-    /*public static void spawnPopup() {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("view/popup.fxml"));
-        AnchorPane page = null;
-        try {
-            page = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        FadeTransition ft = new FadeTransition(Duration.millis(900), page);
-        ft.setFromValue(0.0);
-        ft.setToValue(0.97);
-        ft.play();
-        Popup popup = new Popup();
-        popup.setAutoHide(true);
-        popup.getContent().add(page);
-        popup.show(new Stage());
-    }*/
 
     public static LocalDate mongoDateToLocalDate(String mongodate) {
         SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");

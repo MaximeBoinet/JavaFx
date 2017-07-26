@@ -11,8 +11,13 @@ public class Artist {
     private String _id;
     private String created_at;
     private String updated_at;
+    private String title;
     private LocalDate builded_created_at;
     private LocalDate builded_updated_at;
+
+    public String getTitle() {
+        return title;
+    }
 
     public String get_id() {
         return _id;

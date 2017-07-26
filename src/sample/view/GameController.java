@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import sample.Main;
 import sample.model.AssossiativScorePlayer;
 import sample.model.Game;
+import sample.model.Song;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ import static javafx.collections.FXCollections.*;
 public class GameController {
     private ObservableList<PieChart.Data> avscoreobs;
     private ObservableList<PieChart.Data> avgames;
+    private ObservableList<Song> playlistSongsobs;
     private ObservableList<Game> gameobs;
     private ObservableList<AssossiativScorePlayer> assossobs;
     private String currentGameId;
@@ -47,6 +49,15 @@ public class GameController {
     private TableColumn<AssossiativScorePlayer, String> userg;
 
     @FXML
+    private TableView<Song> playlistSong;
+    @FXML
+    private TableColumn<Song, LocalDate> createdSongP;
+    @FXML
+    private TableColumn<Song, String> titleSongP;
+    @FXML
+    private TableColumn<Song, String> artistSongP;
+
+    @FXML
     private Label totalscore;
     @FXML
     private Label totalgame;
@@ -56,6 +67,8 @@ public class GameController {
     private Label averagescore;
     @FXML
     private Label averageplayed;
+    @FXML
+    private Label totsonggame;
 
 
     @FXML
@@ -67,20 +80,21 @@ public class GameController {
     private StackedBarChart averageplayscor;
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         initMap();
         initTable();
-    }
-
-    private void initTable() {
-        initTableGame();
-        initTableAssos();
         initLabel();
         initData();
     }
 
+    private void initTable() {
+        this.playlistSongsobs = observableArrayList();
+        initTableGame();
+        initTableAssos();
+        initTableSong();
+    }
+
     private void initData() {
-        System.out.print("Ok1");
         int cptplayed = Main.Games.values().size();
         int cptscore = 0;
         int totplayed = 0;
@@ -125,10 +139,10 @@ public class GameController {
         }
         initPieChartScore(sbc);
         initPieChartPlayed(sbc);
-        initStackedBar(sbc, totplayed, totscore);
+        initStackedBar(sbc, totplayed);
     }
 
-    private void initStackedBar(int[][] sbc, int totplayed, int totscore) {
+    private void initStackedBar(int[][] sbc, int totplayed) {
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
         XYChart.Series<String, Number> series2 = new XYChart.Series<>();
         XYChart.Series<String, Number> series3 = new XYChart.Series<>();
@@ -139,17 +153,17 @@ public class GameController {
         yAxis.setLabel("Value %");
         averageplayscor.setTitle("Average played by average score");
         series1.setName("Score below av");
-        series1.getData().add(new XYChart.Data<>("Played below av", sbc[0][0]* (100/totplayed)));
-        series1.getData().add(new XYChart.Data<>("Played av", sbc[1][0]* (100/totplayed)));
-        series1.getData().add(new XYChart.Data<>("Played above av", sbc[2][0]* (100/totplayed)));
+        series1.getData().add(new XYChart.Data<>("Played below av", sbc[0][0]*(100/totplayed)));
+        series1.getData().add(new XYChart.Data<>("Played av", sbc[1][0]*(100/totplayed)));
+        series1.getData().add(new XYChart.Data<>("Played above av", sbc[2][0]*(100/totplayed)));
         series2.setName("Score average");
-        series2.getData().add(new XYChart.Data<>("Played below av", sbc[0][1]* (100/totplayed)));
-        series2.getData().add(new XYChart.Data<>("Played av", sbc[1][1]* (100/totplayed)));
-        series2.getData().add(new XYChart.Data<>("Played above av", sbc[2][1]* (100/totplayed)));
+        series2.getData().add(new XYChart.Data<>("Played below av", sbc[0][1]*(100/totplayed)));
+        series2.getData().add(new XYChart.Data<>("Played av", sbc[1][1]*(100/totplayed)));
+        series2.getData().add(new XYChart.Data<>("Played above av", sbc[2][1]*(100/totplayed)));
         series3.setName("Score above av");
-        series3.getData().add(new XYChart.Data<>("Played below av", sbc[0][2]* (100/totplayed)));
+        series3.getData().add(new XYChart.Data<>("Played below av", sbc[0][2]*(100/totplayed)));
         series3.getData().add(new XYChart.Data<>("Played av", sbc[1][2]* (100/totplayed)));
-        series3.getData().add(new XYChart.Data<>("Played above av", sbc[2][2]* (100/totplayed)));
+        series3.getData().add(new XYChart.Data<>("Played above av", sbc[2][2]*(100/totplayed)));
         averageplayscor.getData().addAll(series1,series2,series3);
 
     }
@@ -175,6 +189,7 @@ public class GameController {
     }
 
     private void initLabel() {
+        totsonggame.setText("");
         totalscore.setText("");
         totalgame.setText(String.valueOf(Main.Games.keySet().size()));
         Iterator it = Main.Games.keySet().iterator();
@@ -199,13 +214,32 @@ public class GameController {
                 (observable, oldValue, newValue) -> setAssoss(newValue));
     }
 
+    private void initTableSong() {
+        this.playlistSong.setItems(this.playlistSongsobs);
+        this.createdSongP.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreated_at()));
+        this.titleSongP.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        this.artistSongP.setCellValueFactory(cellData -> new SimpleStringProperty((cellData.getValue().getArtist().length >= 1? Main.Artist.get(cellData.getValue().getArtist()[0]).getTitle() : "NA")));
+    }
+
     private void setAssoss(Game newValue) {
+        this.currentGameId = "";
         this.totalscore.setText("");
         this.assossobs.clear();
         if (newValue != null) {
+            this.currentGameId = newValue.get_id();
             this.totalscore.setText(String.valueOf(newValue.getScore().length));
             for (AssossiativScorePlayer assoss : newValue.getScore())
                 assossobs.add(assoss);
+        }
+        setGameSong(newValue);
+    }
+
+    private void setGameSong(Game newValue) {
+        this.playlistSongsobs.clear();
+        this.totsonggame.setText("");
+        if (newValue!=null) {
+            for (String id: newValue.getSongs())
+                playlistSongsobs.add(Main.Songs.get(id));
         }
     }
 
@@ -214,6 +248,5 @@ public class GameController {
         this.gameobs = observableArrayList();
         this.gameobs.addAll(Main.Games.values());
     }
-
 
 }

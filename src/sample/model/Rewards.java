@@ -22,7 +22,7 @@ import java.time.LocalDate;
  * Created by MADMAX on 21/06/2017.
  */
 public class Rewards {
-    private static final String BASEURL = "http://mocnodeserv.hopto.org:3000/";
+    private static final String BASEURL = "http://mocnodeserv.hopto.org:80/";
     private String _id;
     private String created_at;
     private String updated_at;

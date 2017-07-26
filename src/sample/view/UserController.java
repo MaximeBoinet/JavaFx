@@ -38,7 +38,7 @@ public class UserController {
     @FXML
     private TableColumn<User, String> tablename;
     @FXML
-    private TableColumn<User, Double> tableGold;
+    private TableColumn<User, String> tableGold;
     @FXML
     private TableColumn<User, LocalDate> tableSince;
     @FXML
@@ -154,7 +154,7 @@ public class UserController {
     private void initTableUser() {
         this.userTab.setItems(usersobs);
         this.tablename.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUserName()));
-        this.tableGold.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getGold().doubleValue()));
+        this.tableGold.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getGold().intValue())));
         this.tableSince.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getCreated_at()));
         this.tableRank.setCellValueFactory(cellData -> new SimpleStringProperty(Main.Ranks.get(cellData.getValue().getRank()).getTitle()));
         this.tableglobScore.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getGlobalScore()));

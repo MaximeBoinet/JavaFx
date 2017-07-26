@@ -4,12 +4,13 @@ import java.net.URL;
 import java.util.*;
 import com.google.gson.*;
 import javafx.application.Platform;
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import sample.model.*;
 
 
 public class ObjectBuilder implements Runnable {
-    private static final String BASEURL = "http://mocnodeserv.hopto.org:3000/";
+    private static final String BASEURL = "http://mocnodeserv.hopto.org:80/";
     private Scanner scan;
     private String res;
     private double indicUnit;
@@ -193,7 +194,7 @@ public class ObjectBuilder implements Runnable {
 
     public void pause(){
         try {
-            Thread.sleep(5);
+            Thread.sleep(20);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -231,14 +232,13 @@ public class ObjectBuilder implements Runnable {
             Main.mainApp.dowloaded = true;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            return;
         }
     }
 
     @Override
     public void run() {
         createObject();
+        pause();
         Platform.runLater(() -> Main.mainApp.dialog.hide());
     }
 }

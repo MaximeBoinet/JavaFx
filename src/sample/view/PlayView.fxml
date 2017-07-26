@@ -34,18 +34,26 @@
                     <panes>
                       <TitledPane animated="false" text="Global Information">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="37.0" layoutY="25.0" text="Total playlists:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalPlaylist" layoutX="135.0" layoutY="25.0" text="Label" />
+                                 </children></AnchorPane>
                         </content>
                       </TitledPane>
                       <TitledPane animated="false" text="Songs">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="songTab" layoutX="50.0" layoutY="78.0" prefHeight="589.0" prefWidth="594.0">
+                                    <TableView fx:id="playlistSong" layoutX="50.0" layoutY="78.0" prefHeight="589.0" prefWidth="594.0">
                                        <columns>
-                                          <TableColumn fx:id="tableTitle" prefWidth="75.0" text="Title" />
-                                          <TableColumn fx:id="tableArtist" prefWidth="75.0" text="Artists" />
-                                          <TableColumn fx:id="tableCreated" prefWidth="75.0" text="Created" />
+                                          <TableColumn fx:id="titleSongP" prefWidth="75.0" text="Title" />
+                                          <TableColumn fx:id="artistSongP" prefWidth="75.0" text="Artists" />
+                                          <TableColumn fx:id="createdSongP" prefWidth="75.0" text="Created" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -56,7 +64,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="160.0" layoutY="34.0" text="Label" />
+                                    <Label fx:id="allsongs" layoutX="160.0" layoutY="34.0" text="Label" />
                                  </children></AnchorPane>
                         </content>
                       </TitledPane>

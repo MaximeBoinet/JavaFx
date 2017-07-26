@@ -61,7 +61,7 @@
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
                                             <yAxis>
-                                              <NumberAxis side="LEFT" />
+                                              <NumberAxis side="LEFT" upperBound="90.0" />
                                             </yAxis>
                                           </StackedBarChart>
                                           <Label layoutX="31.0" layoutY="86.0" text="Average score:">
@@ -106,7 +106,25 @@
                       </TitledPane>
                       <TitledPane animated="false" text="Songs">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="37.0" layoutY="35.0" text="Total songs for this game:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totsonggame" layoutX="209.0" layoutY="35.0" text="Label" />
+                                    <TableView fx:id="playlistSong" layoutX="37.0" layoutY="90.0" prefHeight="462.0" prefWidth="697.0">
+                                      <columns>
+                                        <TableColumn fx:id="titleSongP" prefWidth="75.0" text="Title" />
+                                        <TableColumn fx:id="artistSongP" prefWidth="75.0" text="Artist" />
+                                          <TableColumn fx:id="createdSongP" prefWidth="75.0" text="Created" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children></AnchorPane>
                         </content>
                       </TitledPane>
                     </panes>
