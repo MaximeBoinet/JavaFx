@@ -1,5 +1,6 @@
 package sample.view;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.scene.control.TableView;
 import sample.Main;
 import sample.model.AssossiativScorePlayer;
 import sample.model.Game;
+import sample.model.Playlist;
 import sample.model.Song;
 
 import java.time.LocalDate;
@@ -24,6 +26,7 @@ public class SongsController {
     private ObservableList songobs;
     private ObservableList songGameobs;
     private ObservableList assossobs;
+    private ObservableList playlistobs;
 
     @FXML
     private TableView<Song> songTab;
@@ -49,7 +52,18 @@ public class SongsController {
     private TableColumn<AssossiativScorePlayer, Integer> assossiativScorePlayerIntegerTableColumn;
 
     @FXML
-    private void initialize() {
+    private TableView<Playlist> playlistTabp;
+    @FXML
+    private TableColumn<Playlist, LocalDate> createdThep;
+    @FXML
+    private TableColumn<Playlist, String> numberSongsp;
+    @FXML
+    private TableColumn<Playlist, String> titlePlaylistp;
+    @FXML
+    private TableColumn<Playlist, String> creatorp;
+
+    @FXML
+    public void initialize() {
         initLabel();
         initMap();
         initTable();
@@ -58,7 +72,8 @@ public class SongsController {
     private void initTable() {
         initTableSongs();
         initTableGame();
-
+        initScoreGameTable();
+        initTablePlay();
     }
 
     private void initTableGame() {
@@ -69,12 +84,19 @@ public class SongsController {
                 (observable, oldValue, newValue) -> setScoreGameSongDetail(newValue));
     }
 
+    private void initTablePlay() {
+        this.playlistTabp.setItems(playlistobs);
+        this.createdThep.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreated_at()));
+        this.numberSongsp.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getSongs().length)));
+        this.titlePlaylistp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        this.creatorp.setCellValueFactory(cellData -> new SimpleStringProperty((Main.Users.get(cellData.getValue().getCreator()).getUserName())));
+    }
+
     private void setScoreGameSongDetail(Game newValue) {
+        assossobs.clear();
         if (newValue != null) {
             for (AssossiativScorePlayer id: newValue.getScore())
                 assossobs.add(id);
-        } else {
-            assossobs.clear();
         }
     }
 
@@ -85,6 +107,12 @@ public class SongsController {
         this.tableCreated.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreated_at()));
         this.songTab.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> setSongDetail(newValue));
+    }
+
+    private void initScoreGameTable() {
+        this.assossiativScorePlayerTableView.setItems(assossobs);
+        this.assossiativScorePlayerIntegerTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(Main.Scores.get(cellData.getValue().getScore()).getScoreInGame()));
+        this.assossiativScorePlayerStringTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(Main.Users.get(cellData.getValue().getPlayer()).getUserName()));
     }
 
     private void initMap() {
@@ -100,13 +128,23 @@ public class SongsController {
 
     private void setSongDetail(Song newValue) {
         songGameobs.clear();
+        currentSongId = "";
         if (newValue != null) {
+            currentSongId = newValue.get_id();
             Iterator i = Main.Games.keySet().iterator();
             while (i.hasNext()) {
                 String id = i.next().toString();
                 for (String idsong : Main.Games.get(id).getSongs()) {
                     if (idsong.equals(newValue.get_id()))
                         songGameobs.add(Main.Games.get(id));
+                }
+            }
+
+            for (Playlist play : Main.Playlists.values()) {
+                for (String id: play.getSongs()) {
+                    if (id == currentSongId) {
+                        playlistobs.add(play);
+                    }
                 }
             }
         }

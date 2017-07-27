@@ -46,6 +46,8 @@ public class PlayController {
 
     @FXML
     private Label allsongs;
+    @FXML
+    private Label allplays;
 
     @FXML
     public void initialize() {
@@ -63,10 +65,12 @@ public class PlayController {
         this.playlistsobs = observableArrayList();
         this.playlistSongsobs = observableArrayList();
         this.playlistsobs.addAll(Main.Playlists.values());
+        allplays.setText(String.valueOf(playlistsobs.size()));
     }
 
     private void initLabel() {
         allsongs.setText("");
+        allplays.setText("");
     }
 
     private void initTablePlaylist() {

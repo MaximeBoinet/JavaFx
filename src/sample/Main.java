@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,10 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import sample.model.*;
 import sample.view.LoaderController;
 
@@ -22,8 +19,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
-
-import static java.lang.System.in;
 
 public class Main extends Application {
     public static String token;
@@ -51,7 +46,7 @@ public class Main extends Application {
         this.mainApp = this;
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("StatMaker");
-        this.primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/ico.ico")));
+        this.primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/area_graph.png")));
         this.dowloaded = false;
         Users = new HashMap<>();
         Songs = new HashMap<>();

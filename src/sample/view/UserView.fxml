@@ -14,9 +14,9 @@
    <children>
       <SplitPane dividerPositions="0.4307178631051753" layoutX="59.0" layoutY="85.0" prefHeight="670.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="501.0">
                <children>
-                  <TableView fx:id="userTab" layoutX="186.0" layoutY="159.0" prefHeight="668.0" prefWidth="513.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="userTab" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="668.0" prefWidth="513.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="tablename" prefWidth="75.0" text="UserName" />
                       <TableColumn fx:id="tableGold" prefWidth="75.0" text="Gold" />
