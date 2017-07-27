@@ -116,6 +116,7 @@ public class SongsController {
     }
 
     private void initMap() {
+        this.playlistobs = observableArrayList();
         this.songobs = observableArrayList();
         this.songGameobs = observableArrayList();
         this.assossobs = observableArrayList();
@@ -128,6 +129,7 @@ public class SongsController {
 
     private void setSongDetail(Song newValue) {
         songGameobs.clear();
+        playlistobs.clear();
         currentSongId = "";
         if (newValue != null) {
             currentSongId = newValue.get_id();
@@ -142,7 +144,7 @@ public class SongsController {
 
             for (Playlist play : Main.Playlists.values()) {
                 for (String id: play.getSongs()) {
-                    if (id == currentSongId) {
+                    if (id.equals(currentSongId)) {
                         playlistobs.add(play);
                     }
                 }

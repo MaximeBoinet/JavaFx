@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import sample.Main;
 import sample.model.Rewards;
+import sample.model.User;
 
 import java.time.LocalDate;
 
@@ -57,6 +58,11 @@ public class RewardController {
     private Button delete;
 
     @FXML
+    private Label totre;
+    @FXML
+    private Label totbou;
+
+    @FXML
     private void initialize() {
         update.setDisable(true);
         delete.setDisable(true);
@@ -66,7 +72,12 @@ public class RewardController {
     }
 
     private void initLabel() {
-
+        this.totre.setText("");
+        int tot = 0;
+        for (User us: Main.Users.values()) {
+            tot += us.getRewards().length;
+        }
+        this.totbou.setText(String.valueOf(tot));
     }
 
     private void initMap() {
@@ -97,6 +108,7 @@ public class RewardController {
             this.titleup.setText(reward.getTitle());
             this.goldup.setText(String.valueOf(reward.getGoldToAcces()));
             this.typeup.setText(reward.getType());
+            this.totre.setText(String.valueOf(rewardsobs.size()));
         } else {
             this.currentRewardId = null;
             this.delete.setDisable(true);
